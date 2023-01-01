@@ -24,6 +24,6 @@ class UpdateTagRequest extends FormRequest
      */
     public function rules()
     {
-        return Tag::rules(request()->id);
+        return Tag::rules(request()->tag);
     }
 }

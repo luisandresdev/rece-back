@@ -24,6 +24,6 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return Category::rules(request()->id);
+        return Category::rules(request()->category);
     }
 }
