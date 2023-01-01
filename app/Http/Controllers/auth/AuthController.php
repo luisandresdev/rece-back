@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\auth\LoginRequest;
 use App\Http\Requests\auth\RegisterRequest;
 use App\Models\Category;
+use App\Models\Tag;
 
 class AuthController extends Controller
 {
@@ -41,6 +42,12 @@ class AuthController extends Controller
             ['user_id' => $user->id, 'name' => 'Entrada'],
             ['user_id' => $user->id, 'name' => 'Plato Principal'],
             ['user_id' => $user->id, 'name' => 'Postre'],
+        ], ['user_id', 'name'], ['name']);
+
+        Tag::upsert([
+            ['user_id' => $user->id, 'name' => 'Rápido'],
+            ['user_id' => $user->id, 'name' => 'Rico'],
+            ['user_id' => $user->id, 'name' => 'Sano'],
         ], ['user_id', 'name'], ['name']);
 
         return response()->json(['data' => $user], Response::HTTP_OK);
