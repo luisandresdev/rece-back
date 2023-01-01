@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\auth\LoginRequest;
 use App\Http\Requests\auth\RegisterRequest;
+use App\Models\Category;
 
 class AuthController extends Controller
 {
@@ -35,6 +36,12 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        Category::upsert([
+            ['user_id' => $user->id, 'name' => 'Entrada'],
+            ['user_id' => $user->id, 'name' => 'Plato Principal'],
+            ['user_id' => $user->id, 'name' => 'Postre'],
+        ], ['user_id', 'name'], ['name']);
 
         return response()->json(['data' => $user], Response::HTTP_OK);
     }
