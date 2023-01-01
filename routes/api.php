@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout']);
     Route::apiSingleton('/profile', ProfileController::class);
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword']);
+
+    // categories
+    Route::apiResource('/categories', CategoryController::class);
 });
