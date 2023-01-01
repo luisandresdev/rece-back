@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // categories
     Route::apiResource('/categories', CategoryController::class);
+
+    // tags
+    Route::apiResource('/tags', TagController::class);
 });
