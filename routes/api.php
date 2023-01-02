@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\ShoppingListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // tags
     Route::apiResource('/tags', TagController::class);
+
+    // shopping_lists
+    Route::apiResource('shopping_lists',ShoppingListController::class);
 });
