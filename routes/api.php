@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ShoppingListController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/tags', TagController::class);
 
     // shopping_lists
+    Route::delete('/shopping_lists/{shopping_list}/empty', [ShoppingListController::class, 'empty']);
     Route::apiResource('shopping_lists',ShoppingListController::class);
+
+    // products
+    Route::patch('/products/{product}/completed', [ProductController::class, 'completed']);
+    Route::apiResource('/products', ProductController::class);
 });
