@@ -16,7 +16,12 @@ class ShoppingListController extends Controller
      */
     public function index()
     {
-        return response()->json(['data' => ShoppingList::get()], Response::HTTP_OK);
+        $shoppingList = ShoppingList::with(['products' => function ($query) {
+            $query->where('completed', 1)->count();
+        }])
+            ->withCount(['products'])
+            ->get();
+        return response()->json(['data' => $shoppingList], Response::HTTP_OK);
     }
 
     /**
@@ -68,6 +73,17 @@ class ShoppingListController extends Controller
     public function destroy(ShoppingList $shoppingList)
     {
         $shoppingList->delete();
+        $shoppingList->products()->delete();
+        return response()->json(['data' => $shoppingList], Response::HTTP_OK);
+    }
+
+
+    /**
+     * Vaciar
+     */
+    public function empty(ShoppingList $shoppingList)
+    {
+        $shoppingList->products()->delete();
         return response()->json(['data' => $shoppingList], Response::HTTP_OK);
     }
 }
