@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\HasUser;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
@@ -23,6 +24,12 @@ class Tag extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function recipes(): BelongsToMany
+    {
+        return $this->belongsToMany(Recipe::class);
+    }
+
     // rules
     public static function rules($id = 0): array
     {

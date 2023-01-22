@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -22,6 +23,12 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function recipes(): BelongsToMany
+    {
+        return $this->belongsToMany(Recipe::class,'category_recipe')->withPivot('category_id');
+    }
+
     // rules
     public static function rules($id = 0): array
     {
